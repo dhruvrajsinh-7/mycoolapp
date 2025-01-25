@@ -11,25 +11,24 @@ import com.springbootdemo.mycoolapp.common.Coach;
 public class DemoController {
     //define a private field for the dependency
     private Coach coach;
-    private Coach anotherCoach;
+    // private Coach anotherCoach;
     //define a constructor for dependency injection
     // @Autowired
     // public DemoController(Coach theCoach) {
     //     coach = theCoach;
     // }
     @Autowired
-    public DemoController(@Qualifier("cricketCoach") Coach theCoach,
-                          @Qualifier("cricketCoach") Coach theanotherCoach  
+    public DemoController(@Qualifier("acquatic") Coach theCoach
     ) {
         System.out.println("DemoController: inside constructor");
         coach = theCoach;
-        anotherCoach = theanotherCoach;
+        // anotherCoach = theanotherCoach;
     }
 
-    @GetMapping("/newcheck")
-    public String check() {
-        return "comparing beans : coach and anotherCoach " + (coach == anotherCoach);
-    }
+    // @GetMapping("/newcheck")
+    // public String check() {
+    //     return "comparing beans : coach and anotherCoach " + (coach == anotherCoach);
+    // }
 
     //define endpoint for "/dailyworkout"
     @GetMapping("/dailyworkout")
