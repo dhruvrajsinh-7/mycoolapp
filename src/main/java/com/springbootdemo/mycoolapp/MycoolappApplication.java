@@ -21,9 +21,43 @@ public class MycoolappApplication {
 		return runner -> {
 			// createStudent(studentDao);
 			createMultipleStudents(studentDao);
-			};
+			// queryStudent(studentDao);
+			// queryForStudentsByLastName(studentDao);
+			// updateStudent(studentDao);
+			// deleteStudent(studentDao);
+			// deleteAllStudents(studentDao);
+		};
 	}
 			
+	private void deleteAllStudents(StudentDao studentDao) {
+		// delete all students
+		System.out.println("Deleting all students");
+		int numsRowDeleted = studentDao.deleteAll();
+		System.out.println("Deleted all students" + numsRowDeleted);
+	}
+
+	private void deleteStudent(StudentDao studentDao) {
+		// delete a student
+		System.out.println("Deleting student");
+		int studentId = 4;
+		studentDao.deleteById(studentId);
+		System.out.println("Deleted student with id: " + studentId);
+	}
+
+	private void updateStudent(StudentDao studentDao) {
+		//retrieve the student based on the id: primary key
+		int studentId = 1;
+		Student myStudent = studentDao.findById(studentId);
+		System.out.println("Retrieved student: " + myStudent);
+		// change some values
+		myStudent.setFirstName("Scooby");
+		myStudent.setLastName("Doo");
+		// update the student
+		studentDao.update(myStudent);
+		// display the student
+		System.out.println("Updated student: " + myStudent);
+	}
+
 	private void createMultipleStudents(StudentDao studentDao) {
 		// create multiple students
 		System.out.println("Creating new students");
@@ -39,8 +73,18 @@ public class MycoolappApplication {
 		studentDao.save(myStudent3);
 
 		// dispaly the student ids
-		
+		System.out.println("Saved student. Generated id: ");
+		readStudent(studentDao);
 	}
+
+	private void readStudent(StudentDao studentDao) {
+		// read a student
+		System.out.println("Reading the student");
+		Student myStudent = studentDao.findById(5);
+		// display the student
+		System.out.println(myStudent);
+	}
+
 			
 	private void createStudent(StudentDao studentDao) {
 		// create a student
