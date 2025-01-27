@@ -20,7 +20,7 @@ public class MycoolappApplication {
 	public CommandLineRunner commandLineRunner(StudentDao studentDao) {
 		return runner -> {
 			// createStudent(studentDao);
-			createMultipleStudents(studentDao);
+			// createMultipleStudents(studentDao);
 			// queryStudent(studentDao);
 			// queryForStudentsByLastName(studentDao);
 			// updateStudent(studentDao);
@@ -61,9 +61,9 @@ public class MycoolappApplication {
 	private void createMultipleStudents(StudentDao studentDao) {
 		// create multiple students
 		System.out.println("Creating new students");
-		Student myStudent1 = new Student("John","Doe","johndoe@gmail.com");
-		Student myStudent2 = new Student("Mary","Public","MaryPublic@gmail.com");
-		Student myStudent3 = new Student("Bonita","Applebum","BonitaApplebum@gmail.com");
+		Student myStudent1 = new Student("John","Doe");
+		Student myStudent2 = new Student("Mary","Public");
+		Student myStudent3 = new Student("Bonita","Applebum");
 
 
 		// save the students
@@ -89,12 +89,12 @@ public class MycoolappApplication {
 	private void createStudent(StudentDao studentDao) {
 		// create a student
 		System.out.println("Creating new student");
-		Student myStudent = new Student("John","Doe","john@doe.com");
+		Student myStudent = new Student("John","Doe");
 		// save the student
 		System.out.println("Saving the student");
 		studentDao.save(myStudent);
 		// dispaly the student id	
-		System.out.println("Saved student. Generated id: " + myStudent.getId());
+		// System.out.println("Saved student. Generated id: " + myStudent.getId());
 
 	}
 }
