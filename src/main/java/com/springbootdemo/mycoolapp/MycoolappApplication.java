@@ -7,12 +7,76 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // 	scanBasePackages = {"com.springBootdemo.mycoolapp", "com.springBootdemo.util" })
 import org.springframework.context.annotation.Bean;
 
+import com.springbootdemo.mycoolapp.dao.AppDAO;
+import com.springbootdemo.mycoolapp.entity.Instructor;
+import com.springbootdemo.mycoolapp.entity.InstructorDetail;
 import com.springbootdemo.mycoolapp.entity.Student;
 @SpringBootApplication        
 public class MycoolappApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MycoolappApplication.class, args);
+	}
+
+	@Bean
+	public CommandLineRunner commandLineRunner(AppDAO appDAO) {
+		return args -> {
+			// createInstance(appDAO);
+			// findInstructor(appDAO);
+			// deleteInstructor(appDAO);
+			// findInstructordetail(appDAO);
+			deleteInstructordetail(appDAO);
+		};
+	}
+
+	 private void createInstance(AppDAO appDAO) {
+		// Instructor tempinstructor = new Instructor("John", "Doe", "JohnDoe@email.com");
+
+		// InstructorDetail tempInstructorDetail = new InstructorDetail("http://www.youtube.com", "coding");
+
+		Instructor tempinstructor = new Instructor("wick", "mew", "wickmew@email.com");
+
+		InstructorDetail tempInstructorDetail = new InstructorDetail("http://www.youtubacnde.com", "coding");
+
+
+		tempinstructor.setInstructorDetail(tempInstructorDetail);
+
+
+
+		System.out.println("Saving instructor: " + tempinstructor);
+		appDAO.save(tempinstructor);
+		System.out.println("done");
+	}
+
+	private void findInstructor(AppDAO appDAO) {
+		int id = 2;
+		Instructor tempInstructor = appDAO.findInstructorById(id);
+		System.out.println("Instructor: " + tempInstructor);
+		System.out.println("the associated instructor detail: " + tempInstructor.getInstructorDetail());
+	}
+
+	private void deleteInstructor(AppDAO appDAO) {
+		int id = 3;
+		Instructor tempInstructor = appDAO.findInstructorById(id);
+		appDAO.deleteInstructorById(id);
+		System.out.println("Deleted instructor: " + tempInstructor);
+		System.out.println("the associated instructor detail: " + tempInstructor.getInstructorDetail());
+	}
+
+
+	private void findInstructordetail(AppDAO appDAO) {
+		int id = 1;
+		InstructorDetail tempInstructorDetail = appDAO.findInstructorDetailById(id);
+		System.out.println("InstructorDetail: " + tempInstructorDetail);
+		System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
+	}
+
+	private void deleteInstructordetail(AppDAO appDAO) {
+		int id = 4;
+		InstructorDetail tempInstructorDetail = appDAO.findInstructorDetailById(id);
+		appDAO.deleteInstructorDetailById(id);
+		System.out.println("Deleted instructorDetail: " + tempInstructorDetail);
+		System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
 	}
 
 	// @Bean
